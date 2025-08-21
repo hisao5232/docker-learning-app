@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.env
+
+# Flask/SQLite（今回はPostgreSQLだから不要かも）
+instance/
+*.db
+
+# Docker
+*.log
+*.pid
+*.env
+docker-compose.override.yml
+docker/*.log
+docker_learning_app_db/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
