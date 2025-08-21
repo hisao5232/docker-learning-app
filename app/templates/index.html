@@ -2,10 +2,21 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Docker Learning App</title>
+    <title>Notes App</title>
 </head>
 <body>
-    <h1>こんにちは！Docker × Flask の世界へようこそ 🚀</h1>
-    <p>これは Flask が返しているシンプルな HTML ページです。</p>
+    <h1>Notes App</h1>
+
+    <form action="/add_note" method="post">
+        <input type="text" name="text" placeholder="ノートを入力" required>
+        <button type="submit">追加</button>
+    </form>
+
+    <h2>ノート一覧</h2>
+    <ul>
+        {% for note in notes %}
+            <li>{{ note.text }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

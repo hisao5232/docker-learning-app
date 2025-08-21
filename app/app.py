@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -30,7 +30,8 @@ def health():
 # HTML表示
 @app.route("/")
 def index():
-    return render_template("index.html")
+    notes = Note.query.order_by(Note.id.asc()).all()
+    return render_template("index.html", notes=notes)
 
 # Note一覧取得
 @app.get("/notes")
@@ -51,5 +52,14 @@ def add_note():
     db.session.commit()
     return jsonify({"id": note.id, "text": note.text}), 201
 
+@app.post("/add_note")
+def add_note_form():
+    text = (request.form.get("text") or "").strip()
+    if text:
+        note = Note(text=text)
+        db.session.add(note)
+        db.session.commit()
+    return redirect("/")
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
